@@ -1,5 +1,6 @@
 import { CheckCircle2, Award, Shield, Leaf } from "lucide-react";
 import ScrollAnimator from "./ScrollAnimator";
+import happyCustomerImg from "@/assets/happy-customer.jpg";
 
 const highlights = [
   { icon: Award, text: "Certified & Licensed Installers" },
@@ -17,18 +18,26 @@ const AboutSection = () => {
           {/* Image Side */}
           <ScrollAnimator animation="fade-in-up">
             <div className="relative">
-              <div className="aspect-[4/3] rounded-2xl glass-strong overflow-hidden relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/10" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-20 h-20 mx-auto rounded-2xl bg-primary/20 flex items-center justify-center mb-4">
-                      <Leaf className="w-10 h-10 text-primary" />
-                    </div>
-                    <p className="text-sm text-muted-foreground">Powering a Greener Tomorrow</p>
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden relative shadow-2xl shadow-primary/10">
+                <img
+                  src={happyCustomerImg}
+                  alt="Happy customer family with solar panels"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  width={1200}
+                  height={800}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 glass rounded-xl p-3 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
+                    <Leaf className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-foreground">1200+ Happy Families</div>
+                    <div className="text-[10px] text-muted-foreground">Saving money with Eurosol Prime</div>
                   </div>
                 </div>
               </div>
-              {/* Floating accent */}
               <div className="absolute -bottom-4 -right-4 w-24 h-24 rounded-xl bg-primary/10 border border-primary/20 animate-float" />
             </div>
           </ScrollAnimator>
@@ -41,8 +50,11 @@ const AboutSection = () => {
                 India's Trusted{" "}
                 <span className="gradient-text">Solar Energy</span> Partner
               </h2>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                Eurosol Prime is a premier solar energy solutions provider dedicated to transforming how India powers its homes and businesses. With cutting-edge European technology and deep local expertise, we deliver solar systems that are efficient, durable, and cost-effective.
+              </p>
               <p className="text-muted-foreground leading-relaxed mb-8">
-                Eurosol Prime is a premier solar energy solutions provider dedicated to transforming how India powers its homes and businesses. With cutting-edge European technology and deep local expertise, we deliver solar systems that are efficient, durable, and cost-effective. Our mission is to make clean energy accessible to every household.
+                Our mission is to make clean energy accessible to every household. We've helped <span className="text-primary font-semibold">1200+ families</span> reduce their electricity bills by up to 90%, and our installations are backed by a <span className="text-primary font-semibold">10-year warranty</span>.
               </p>
             </ScrollAnimator>
 
