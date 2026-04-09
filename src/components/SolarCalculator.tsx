@@ -132,7 +132,7 @@ const SolarCalculator = () => {
                         </div>
                       </div>
 
-                      <Button variant="outline" className="w-full border-primary/30 hover:bg-primary/10 font-semibold">
+                      <Button variant="outline" className="w-full border-primary/30 hover:bg-primary/10 font-semibold" onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
                         Get Exact Quote — It's Free
                       </Button>
                     </div>

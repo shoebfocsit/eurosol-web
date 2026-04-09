@@ -6,6 +6,7 @@ const navLinks = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
+  { label: "Calculator", href: "#calculator" },
   { label: "Projects", href: "#projects" },
   { label: "Testimonials", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
@@ -56,7 +57,7 @@ const Navbar = () => {
 
           {/* CTA */}
           <div className="hidden md:block">
-            <Button className="animate-pulse-glow font-semibold px-6">
+            <Button className="animate-pulse-glow font-semibold px-6" onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
               Get Free Quote
             </Button>
           </div>
@@ -86,7 +87,7 @@ const Navbar = () => {
               </a>
             ))}
             <div className="pt-4">
-              <Button className="w-full animate-pulse-glow font-semibold">
+              <Button className="w-full animate-pulse-glow font-semibold" onClick={() => { setMobileOpen(false); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}>
                 Get Free Quote
               </Button>
             </div>

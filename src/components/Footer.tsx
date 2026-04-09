@@ -1,4 +1,5 @@
 import { Sun, Facebook, Instagram, Linkedin, Twitter, ArrowUp } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -32,10 +33,17 @@ const Footer = () => {
           <div>
             <h4 className="font-bold text-foreground mb-4 text-sm">Quick Links</h4>
             <ul className="space-y-2">
-              {["Home", "About Us", "Services", "Projects", "Contact"].map((link) => (
-                <li key={link}>
-                  <a href={`#${link.toLowerCase().replace(" ", "")}`} className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    {link}
+              {[
+                { label: "Home", href: "#home" },
+                { label: "About Us", href: "#about" },
+                { label: "Services", href: "#services" },
+                { label: "Solar Calculator", href: "#calculator" },
+                { label: "Projects", href: "#projects" },
+                { label: "Contact", href: "#contact" },
+              ].map((link) => (
+                <li key={link.label}>
+                  <a href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    {link.label}
                   </a>
                 </li>
               ))}
@@ -68,9 +76,20 @@ const Footer = () => {
 
         {/* Bottom */}
         <div className="mt-12 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-muted-foreground">
-            © 2024 Eurosol Prime. All rights reserved. | Euro Technology Solar Intelligence
-          </p>
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+            <p className="text-xs text-muted-foreground">
+              © 2024 Eurosol Prime. All rights reserved.
+            </p>
+            <div className="flex items-center gap-3 text-xs">
+              <Link to="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors">
+                Privacy Policy
+              </Link>
+              <span className="text-border">|</span>
+              <Link to="/terms-conditions" className="text-muted-foreground hover:text-primary transition-colors">
+                Terms & Conditions
+              </Link>
+            </div>
+          </div>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="w-10 h-10 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all"
