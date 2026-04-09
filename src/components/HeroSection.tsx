@@ -1,8 +1,9 @@
 import { useEffect, useState, useRef } from "react";
-import { ArrowRight, Zap, Home, Calendar, Users, Star, Shield } from "lucide-react";
+import { ArrowRight, Zap, Home, Calendar, Users, Star, Shield, Calculator } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ownerImg from "@/assets/owner-portrait.png";
 import heroBg from "@/assets/solar-hero-bg.jpg";
+import ParticleField from "./ParticleField";
 
 const stats = [
   { icon: Zap, value: 500, suffix: "+", label: "Panels Installed" },
@@ -43,24 +44,38 @@ const Counter = ({ target, suffix }: { target: number; suffix: string }) => {
 };
 
 const floatingBadges = [
-  { icon: Star, text: "4.9★ Rating", pos: "top-[15%] -left-4 sm:left-4", delay: "0s" },
-  { icon: Shield, text: "10 Yr Warranty", pos: "top-[35%] -right-4 sm:right-4", delay: "0.5s" },
-  { icon: Users, text: "1200+ Customers", pos: "bottom-[30%] -left-4 sm:left-0", delay: "1s" },
-  { icon: Zap, text: "500+ Installations", pos: "bottom-[12%] -right-4 sm:right-0", delay: "1.5s" },
+  { icon: Star, text: "4.9★ Rating", pos: "top-[10%] left-[-30%] sm:left-[-40%]", delay: "0s" },
+  { icon: Shield, text: "10 Yr Warranty", pos: "top-[30%] right-[-30%] sm:right-[-40%]", delay: "0.5s" },
+  { icon: Users, text: "1200+ Customers", pos: "bottom-[25%] left-[-25%] sm:left-[-35%]", delay: "1s" },
+  { icon: Zap, text: "500+ Installations", pos: "bottom-[8%] right-[-25%] sm:right-[-35%]", delay: "1.5s" },
 ];
 
 const HeroSection = () => {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const parallaxSlow = scrollY * 0.3;
+  const parallaxFast = scrollY * 0.5;
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <img src={heroBg} alt="" className="w-full h-full object-cover" width={1920} height={1080} />
+      {/* Background Image with parallax */}
+      <div className="absolute inset-0" style={{ transform: `translateY(${parallaxSlow * 0.5}px)` }}>
+        <img src={heroBg} alt="" className="w-full h-full object-cover scale-110" width={1920} height={1080} />
         <div className="absolute inset-0 bg-background/85" />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/70 to-background" />
       </div>
 
+      {/* Particle animation */}
+      <ParticleField />
+
       {/* Animated Grid */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 z-[2]">
         <div
           className="absolute inset-0 opacity-[0.03] animate-grid-move"
           style={{
@@ -74,7 +89,7 @@ const HeroSection = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-8 w-full">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left — Text Content */}
-          <div className="text-center lg:text-left order-2 lg:order-1">
+          <div className="text-center lg:text-left order-2 lg:order-1" style={{ transform: `translateY(${parallaxFast * -0.1}px)` }}>
             {/* Badge */}
             <div className="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-6 animate-fade-in">
               <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
@@ -102,42 +117,53 @@ const HeroSection = () => {
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center animate-fade-in-up" style={{ animationDelay: "400ms" }}>
-              <Button size="lg" className="animate-pulse-glow text-base px-8 py-6 font-bold group">
+              <Button
+                size="lg"
+                className="animate-pulse-glow text-base px-8 py-6 font-bold group"
+                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+              >
                 Book Free Site Survey
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button variant="outline" size="lg" className="text-base px-8 py-6 border-border hover:border-primary/50">
+              <Button
+                variant="outline"
+                size="lg"
+                className="text-base px-8 py-6 border-border hover:border-primary/50 group"
+                onClick={() => document.getElementById("calculator")?.scrollIntoView({ behavior: "smooth" })}
+              >
+                <Calculator className="w-5 h-5 mr-1" />
                 Calculate Savings
               </Button>
             </div>
           </div>
 
           {/* Right — Owner Photo with Floating Badges */}
-          <div className="relative flex justify-center order-1 lg:order-2 animate-fade-in-up" style={{ animationDelay: "300ms" }}>
+          <div className="relative flex justify-center order-1 lg:order-2 animate-fade-in-up" style={{ animationDelay: "300ms", transform: `translateY(${parallaxFast * -0.15}px)` }}>
             {/* Glow behind owner */}
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-64 h-64 sm:w-80 sm:h-80 bg-primary/15 rounded-full blur-[80px]" />
             </div>
 
-            {/* Owner image */}
-            <div className="relative">
-              <div className="w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary/30 relative z-10 shadow-2xl shadow-primary/20">
+            {/* Owner image container — wider to allow floating badges */}
+            <div className="relative w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] flex items-center justify-center">
+              {/* Circular photo */}
+              <div className="w-48 h-48 sm:w-60 sm:h-60 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-primary/30 relative z-10 shadow-2xl shadow-primary/20">
                 <img src={ownerImg} alt="Eurosol Prime Founder" className="w-full h-full object-cover object-top" width={768} height={1024} />
               </div>
 
               {/* Rotating ring */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-[110%] h-[110%] rounded-full border-2 border-dashed border-primary/20 animate-spin" style={{ animationDuration: "20s" }} />
+                <div className="w-56 h-56 sm:w-72 sm:h-72 md:w-[280px] md:h-[280px] rounded-full border-2 border-dashed border-primary/20 animate-spin" style={{ animationDuration: "20s" }} />
               </div>
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-[125%] h-[125%] rounded-full border border-primary/10 animate-spin" style={{ animationDuration: "30s", animationDirection: "reverse" }} />
+                <div className="w-64 h-64 sm:w-80 sm:h-80 md:w-[320px] md:h-[320px] rounded-full border border-primary/10 animate-spin" style={{ animationDuration: "30s", animationDirection: "reverse" }} />
               </div>
 
-              {/* Floating vector badges */}
+              {/* Floating vector badges — positioned relative to the 320/400px container */}
               {floatingBadges.map((badge, i) => (
                 <div
                   key={i}
-                  className={`absolute ${badge.pos} z-20 glass rounded-xl px-3 py-2 flex items-center gap-2 animate-float shadow-lg shadow-primary/10`}
+                  className={`absolute ${badge.pos} z-20 glass rounded-xl px-3 py-2 flex items-center gap-2 animate-float shadow-lg shadow-primary/10 border border-primary/10`}
                   style={{ animationDelay: badge.delay }}
                 >
                   <div className="w-7 h-7 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
