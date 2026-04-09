@@ -3,10 +3,12 @@ import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import ServicesSection from "@/components/ServicesSection";
+import SolarCalculator from "@/components/SolarCalculator";
 import ProjectsShowcase from "@/components/ProjectsShowcase";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const Index = () => {
   return (
@@ -16,10 +18,12 @@ const Index = () => {
       <AboutSection />
       <WhyChooseUs />
       <ServicesSection />
+      <SolarCalculator />
       <ProjectsShowcase />
       <TestimonialsSection />
       <ContactSection />
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 };
