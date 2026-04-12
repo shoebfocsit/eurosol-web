@@ -56,7 +56,7 @@ const TeamSection = () => {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
           {team.map((member, i) => (
-            <ScrollAnimator key={member.name} style={{ transitionDelay: `${i * 100}ms` }}>
+            <ScrollAnimator key={member.name} delay={i * 100}>
               <div className="glass rounded-2xl p-4 sm:p-5 text-center group hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
                 {/* Image */}
                 <div className="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-4">
