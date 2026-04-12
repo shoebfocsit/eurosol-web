@@ -1,12 +1,15 @@
 import { useState } from "react";
-import { Calculator, Zap, Clock, Sun, IndianRupee, TrendingDown, ArrowRight, BadgeIndianRupee, Landmark, AlertTriangle } from "lucide-react";
+import { Calculator, Zap, Clock, Sun, IndianRupee, TrendingDown, ArrowRight, BadgeIndianRupee, Landmark, AlertTriangle, Building2, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import ScrollAnimator from "./ScrollAnimator";
 
+type SystemType = "residential" | "commercial";
+
 const SolarCalculator = () => {
   const [bill, setBill] = useState("");
   const [error, setError] = useState("");
+  const [systemType, setSystemType] = useState<SystemType>("residential");
   const [includeSubsidy, setIncludeSubsidy] = useState(true);
   const [result, setResult] = useState<null | {
     systemSize: number;
@@ -17,6 +20,8 @@ const SolarCalculator = () => {
     systemCostWithoutSubsidy: number;
     co2Saved: number;
     subsidyAmount: number;
+    category: string;
+    systemType: SystemType;
   }>(null);
 
   const calculate = () => {
@@ -24,31 +29,82 @@ const SolarCalculator = () => {
     if (!bill.trim()) { setError("Please enter your monthly bill"); return; }
     if (isNaN(monthlyBill)) { setError("Enter a valid number"); return; }
     if (monthlyBill < 500) { setError("Minimum bill should be ₹500"); return; }
-    if (monthlyBill > 100000) { setError("Maximum bill should be ₹1,00,000"); return; }
+    if (monthlyBill > 500000) { setError("Maximum bill should be ₹5,00,000"); return; }
     setError("");
 
-    const ratePerUnit = 8;
+    const ratePerUnit = systemType === "residential" ? 8 : 10;
     const monthlyUnits = monthlyBill / ratePerUnit;
     const dailyUnits = monthlyUnits / 30;
-    const systemSize = Math.ceil(dailyUnits / 4 * 10) / 10;
-    const costPerKWNoSubsidy = 70000;
-    const systemCostWithoutSubsidy = Math.round(systemSize * costPerKWNoSubsidy);
+    const rawSize = dailyUnits / 4;
 
-    // Govt subsidy calculation (PM Surya Ghar scheme approximation)
-    let subsidyPerKW = 0;
-    if (systemSize <= 2) subsidyPerKW = 30000;
-    else if (systemSize <= 3) subsidyPerKW = 18000;
-    else subsidyPerKW = 9000;
-    const subsidyAmount = Math.round(Math.min(systemSize, 10) * subsidyPerKW);
+    // System size tiers based on bill and type
+    let systemSize: number;
+    let category: string;
+    let costPerKW: number;
+
+    if (systemType === "residential") {
+      if (monthlyBill <= 2000) {
+        systemSize = 2;
+        category = "Small Home";
+        costPerKW = 72000;
+      } else if (monthlyBill <= 4000) {
+        systemSize = 3;
+        category = "Medium Home";
+        costPerKW = 70000;
+      } else if (monthlyBill <= 7000) {
+        systemSize = 5;
+        category = "Large Home";
+        costPerKW = 65000;
+      } else if (monthlyBill <= 12000) {
+        systemSize = 8;
+        category = "Premium Home";
+        costPerKW = 60000;
+      } else {
+        systemSize = Math.ceil(rawSize);
+        category = "Villa / Bungalow";
+        costPerKW = 58000;
+      }
+    } else {
+      // Commercial
+      if (monthlyBill <= 15000) {
+        systemSize = 10;
+        category = "Small Business";
+        costPerKW = 55000;
+      } else if (monthlyBill <= 40000) {
+        systemSize = 25;
+        category = "Medium Business";
+        costPerKW = 50000;
+      } else if (monthlyBill <= 100000) {
+        systemSize = 50;
+        category = "Large Business";
+        costPerKW = 45000;
+      } else {
+        systemSize = Math.ceil(rawSize);
+        category = "Industrial / Factory";
+        costPerKW = 42000;
+      }
+    }
+
+    const systemCostWithoutSubsidy = Math.round(systemSize * costPerKW);
+
+    // Govt subsidy (PM Surya Ghar - only for residential up to 10kW)
+    let subsidyAmount = 0;
+    if (systemType === "residential" && systemSize <= 10) {
+      let subsidyPerKW = 0;
+      if (systemSize <= 2) subsidyPerKW = 30000;
+      else if (systemSize <= 3) subsidyPerKW = 18000;
+      else subsidyPerKW = 9000;
+      subsidyAmount = Math.round(Math.min(systemSize, 10) * subsidyPerKW);
+    }
+
     const systemCostWithSubsidy = Math.max(systemCostWithoutSubsidy - subsidyAmount, 0);
-
     const monthlySavings = Math.round(monthlyBill * 0.85);
     const annualSavings = monthlySavings * 12;
-    const effectiveCost = includeSubsidy ? systemCostWithSubsidy : systemCostWithoutSubsidy;
+    const effectiveCost = (includeSubsidy && systemType === "residential") ? systemCostWithSubsidy : systemCostWithoutSubsidy;
     const paybackYears = Math.round((effectiveCost / annualSavings) * 10) / 10;
     const co2Saved = Math.round(monthlyUnits * 12 * 0.82 / 1000 * 10) / 10;
 
-    setResult({ systemSize, monthlySavings, annualSavings, paybackYears, systemCostWithSubsidy, systemCostWithoutSubsidy, co2Saved, subsidyAmount });
+    setResult({ systemSize, monthlySavings, annualSavings, paybackYears, systemCostWithSubsidy, systemCostWithoutSubsidy, co2Saved, subsidyAmount, category, systemType });
   };
 
   return (
@@ -83,6 +139,32 @@ const SolarCalculator = () => {
                     </div>
                   </div>
 
+                  {/* System Type Toggle */}
+                  <div className="grid grid-cols-2 gap-2 mb-4">
+                    <button
+                      onClick={() => { setSystemType("residential"); setResult(null); }}
+                      className={`flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all border ${
+                        systemType === "residential"
+                          ? "bg-primary/15 border-primary text-primary"
+                          : "glass border-border text-muted-foreground hover:border-primary/30"
+                      }`}
+                    >
+                      <Home className="w-4 h-4" />
+                      Residential
+                    </button>
+                    <button
+                      onClick={() => { setSystemType("commercial"); setResult(null); setIncludeSubsidy(false); }}
+                      className={`flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all border ${
+                        systemType === "commercial"
+                          ? "bg-primary/15 border-primary text-primary"
+                          : "glass border-border text-muted-foreground hover:border-primary/30"
+                      }`}
+                    >
+                      <Building2 className="w-4 h-4" />
+                      Commercial
+                    </button>
+                  </div>
+
                   <label className="text-sm font-medium text-foreground mb-2 block">
                     Monthly Electricity Bill (₹)
                   </label>
@@ -90,7 +172,7 @@ const SolarCalculator = () => {
                     <IndianRupee className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                     <Input
                       type="number"
-                      placeholder="e.g. 3000"
+                      placeholder={systemType === "residential" ? "e.g. 3000" : "e.g. 25000"}
                       value={bill}
                       onChange={(e) => { setBill(e.target.value); setError(""); }}
                       className={`pl-9 bg-secondary/50 border-border focus:border-primary h-11 sm:h-12 text-base sm:text-lg ${error ? "border-destructive" : ""}`}
@@ -98,19 +180,21 @@ const SolarCalculator = () => {
                   </div>
                   {error && <p className="text-destructive text-xs mb-2">{error}</p>}
 
-                  {/* Govt Subsidy Toggle */}
-                  <label className="flex items-center gap-3 mb-4 mt-3 glass rounded-xl px-4 py-3 cursor-pointer group hover:border-primary/20 transition-all">
-                    <input
-                      type="checkbox"
-                      checked={includeSubsidy}
-                      onChange={(e) => setIncludeSubsidy(e.target.checked)}
-                      className="w-4 h-4 accent-primary rounded"
-                    />
-                    <div className="flex items-center gap-2">
-                      <Landmark className="w-4 h-4 text-primary" />
-                      <span className="text-xs sm:text-sm font-medium text-foreground">Include Govt. Subsidy (PM Surya Ghar)</span>
-                    </div>
-                  </label>
+                  {/* Govt Subsidy Toggle - only for residential */}
+                  {systemType === "residential" && (
+                    <label className="flex items-center gap-3 mb-4 mt-3 glass rounded-xl px-4 py-3 cursor-pointer group hover:border-primary/20 transition-all">
+                      <input
+                        type="checkbox"
+                        checked={includeSubsidy}
+                        onChange={(e) => setIncludeSubsidy(e.target.checked)}
+                        className="w-4 h-4 accent-primary rounded"
+                      />
+                      <div className="flex items-center gap-2">
+                        <Landmark className="w-4 h-4 text-primary" />
+                        <span className="text-xs sm:text-sm font-medium text-foreground">Include Govt. Subsidy (PM Surya Ghar)</span>
+                      </div>
+                    </label>
+                  )}
 
                   <Button
                     onClick={calculate}
@@ -133,27 +217,42 @@ const SolarCalculator = () => {
                   {result ? (
                     <div className="space-y-3 animate-fade-in">
                       <div className="glass rounded-xl p-4 border-primary/20">
-                        <div className="flex items-center gap-3 mb-1">
-                          <Sun className="w-5 h-5 text-primary" />
-                          <span className="text-xs sm:text-sm text-muted-foreground">Recommended System</span>
+                        <div className="flex items-center justify-between mb-1">
+                          <div className="flex items-center gap-3">
+                            <Sun className="w-5 h-5 text-primary" />
+                            <span className="text-xs sm:text-sm text-muted-foreground">Recommended System</span>
+                          </div>
+                          <span className={`text-[10px] px-2 py-0.5 rounded-full font-semibold ${
+                            result.systemType === "residential" ? "bg-primary/15 text-primary" : "bg-accent text-accent-foreground"
+                          }`}>
+                            {result.category}
+                          </span>
                         </div>
                         <div className="text-xl sm:text-2xl font-extrabold text-foreground">{result.systemSize} kW</div>
                         <div className="text-xs text-muted-foreground mt-1">
-                          {includeSubsidy ? (
+                          {includeSubsidy && result.systemType === "residential" && result.subsidyAmount > 0 ? (
                             <>
                               <span className="line-through mr-2">₹{result.systemCostWithoutSubsidy.toLocaleString('en-IN')}</span>
                               <span className="text-primary font-bold">₹{result.systemCostWithSubsidy.toLocaleString('en-IN')}</span>
                               <span className="ml-1">(after subsidy)</span>
                             </>
                           ) : (
-                            <span>Cost: ₹{result.systemCostWithoutSubsidy.toLocaleString('en-IN')}</span>
+                            <span>Est. Cost: ₹{result.systemCostWithoutSubsidy.toLocaleString('en-IN')}</span>
                           )}
                         </div>
-                        {includeSubsidy && (
+                        {includeSubsidy && result.systemType === "residential" && result.subsidyAmount > 0 && (
                           <div className="flex items-center gap-1.5 mt-2 bg-primary/10 rounded-lg px-3 py-1.5">
                             <BadgeIndianRupee className="w-4 h-4 text-primary" />
                             <span className="text-[10px] sm:text-xs font-semibold text-primary">
                               Govt. Subsidy: ₹{result.subsidyAmount.toLocaleString('en-IN')} savings!
+                            </span>
+                          </div>
+                        )}
+                        {result.systemType === "commercial" && (
+                          <div className="flex items-center gap-1.5 mt-2 bg-accent/30 rounded-lg px-3 py-1.5">
+                            <Building2 className="w-4 h-4 text-accent-foreground" />
+                            <span className="text-[10px] sm:text-xs font-semibold text-accent-foreground">
+                              Accelerated depreciation benefit available
                             </span>
                           </div>
                         )}
