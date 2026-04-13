@@ -8,16 +8,16 @@ import salesImg from "@/assets/team-sales.png";
 
 const team = [
   {
-    name: "Shoeb Khan",
+    name: "Amar Kapse",
     role: "Founder & CEO",
     image: founderImg,
-    desc: "Visionary leader with 10+ years in renewable energy, driving India's solar revolution.",
+    desc: "Visionary leader with 10+ years in renewable energy, driving India's solar revolution from Indore.",
   },
   {
-    name: "Arjun Patel",
+    name: "Priya Kapse",
     role: "Co-Founder & COO",
     image: cofounderImg,
-    desc: "Operations expert ensuring seamless project delivery across Gujarat & India.",
+    desc: "Operations expert ensuring seamless project delivery across Madhya Pradesh & Maharashtra.",
   },
   {
     name: "Rahul Sharma",
@@ -58,7 +58,6 @@ const TeamSection = () => {
           {team.map((member, i) => (
             <ScrollAnimator key={member.name} delay={i * 100}>
               <div className="glass rounded-2xl p-4 sm:p-5 text-center group hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
-                {/* Image */}
                 <div className="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-4">
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/30 to-primary/5 animate-pulse" />
                   <img

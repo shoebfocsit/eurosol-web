@@ -4,26 +4,26 @@ import ScrollAnimator from "./ScrollAnimator";
 
 const testimonials = [
   {
-    name: "Rahul Sharma",
-    location: "Lucknow, UP",
+    name: "Rajesh Patel",
+    location: "Indore, MP",
     rating: 5,
     text: "Eurosol Prime transformed our home! Our electricity bill dropped from ₹8,000 to just ₹800 per month. The installation was quick, professional, and hassle-free. Highly recommended!",
   },
   {
-    name: "Amit Pandey",
-    location: "Kanpur, UP",
+    name: "Amit Verma",
+    location: "Nagpur, Maharashtra",
     rating: 5,
     text: "Best decision we ever made. The team at Eurosol Prime guided us through every step, from subsidy application to net metering. Absolutely world-class service!",
   },
   {
-    name: "Neha Srivastava",
-    location: "Varanasi, UP",
+    name: "Neha Sharma",
+    location: "Bhopal, MP",
     rating: 5,
     text: "We installed a 10kW system for our school and the results have been phenomenal. Clean energy, zero bills, and the students love learning about solar technology!",
   },
   {
-    name: "Vikram Singh",
-    location: "Noida, UP",
+    name: "Vikram Deshmukh",
+    location: "Nagpur, Maharashtra",
     rating: 5,
     text: "The quality of panels and inverter is outstanding. Eurosol Prime uses top-tier European components that you can actually see performing better than local alternatives.",
   },
@@ -55,17 +55,14 @@ const TestimonialsSection = () => {
           <div className="max-w-3xl mx-auto">
             <div className="glass rounded-2xl p-8 sm:p-10 relative">
               <Quote className="absolute top-6 right-6 w-10 h-10 text-primary/10" />
-              
               <div className="flex gap-1 mb-5">
                 {Array.from({ length: testimonials[active].rating }).map((_, i) => (
                   <Star key={i} className="w-5 h-5 fill-primary text-primary" />
                 ))}
               </div>
-
               <p className="text-foreground text-base sm:text-lg leading-relaxed mb-8 min-h-[80px]">
                 "{testimonials[active].text}"
               </p>
-
               <div className="flex items-center justify-between">
                 <div>
                   <div className="font-bold text-foreground">{testimonials[active].name}</div>
@@ -81,15 +78,9 @@ const TestimonialsSection = () => {
                 </div>
               </div>
             </div>
-
-            {/* Dots */}
             <div className="flex justify-center gap-2 mt-6">
               {testimonials.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActive(i)}
-                  className={`h-2 rounded-full transition-all duration-300 ${i === active ? "w-8 bg-primary" : "w-2 bg-muted-foreground/30"}`}
-                />
+                <button key={i} onClick={() => setActive(i)} className={`h-2 rounded-full transition-all duration-300 ${i === active ? "w-8 bg-primary" : "w-2 bg-muted-foreground/30"}`} />
               ))}
             </div>
           </div>

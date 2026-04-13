@@ -6,7 +6,7 @@ import ScrollAnimator from "./ScrollAnimator";
 import { toast } from "sonner";
 
 const contactInfo = [
-  { icon: Phone, label: "Call Us", value: "+91 98765 43210", sub: "Mon-Sat, 9AM-7PM" },
+  { icon: Phone, label: "Call Us", value: "+91 98344 60139", sub: "Mon-Sat, 9AM-7PM" },
   { icon: Mail, label: "Email Us", value: "info@eurosolprime.com", sub: "Quick response guaranteed" },
   { icon: Clock, label: "Working Hours", value: "Mon - Sat: 9AM - 7PM", sub: "Sunday by appointment" },
 ];
@@ -102,7 +102,6 @@ const ContactSection = () => {
   return (
     <section id="contact" className="py-16 sm:py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Info Strip */}
         <ScrollAnimator className="mb-12">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
             {contactInfo.map((c, i) => (
@@ -118,7 +117,6 @@ const ContactSection = () => {
           </div>
         </ScrollAnimator>
 
-        {/* Form */}
         <ScrollAnimator>
           <div className="max-w-2xl mx-auto glass rounded-2xl p-6 sm:p-10">
             <div className="text-center mb-8">
@@ -136,55 +134,26 @@ const ContactSection = () => {
               </div>
             ) : (
               <form className="space-y-4" onSubmit={handleSubmit}>
-                {/* Name & Phone */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <Input
-                      placeholder="Your Name *"
-                      value={form.name}
-                      onChange={(e) => updateField("name", e.target.value)}
-                      className={`bg-secondary/50 border-border focus:border-primary ${errors.name ? "border-destructive" : ""}`}
-                    />
+                    <Input placeholder="Your Name *" value={form.name} onChange={(e) => updateField("name", e.target.value)} className={`bg-secondary/50 border-border focus:border-primary ${errors.name ? "border-destructive" : ""}`} />
                     {errors.name && <p className="text-destructive text-xs mt-1">{errors.name}</p>}
                   </div>
                   <div>
-                    <Input
-                      placeholder="Phone Number *"
-                      type="tel"
-                      value={form.phone}
-                      onChange={(e) => updateField("phone", e.target.value)}
-                      className={`bg-secondary/50 border-border focus:border-primary ${errors.phone ? "border-destructive" : ""}`}
-                    />
+                    <Input placeholder="Phone Number *" type="tel" value={form.phone} onChange={(e) => updateField("phone", e.target.value)} className={`bg-secondary/50 border-border focus:border-primary ${errors.phone ? "border-destructive" : ""}`} />
                     {errors.phone && <p className="text-destructive text-xs mt-1">{errors.phone}</p>}
                   </div>
                 </div>
 
-                {/* Email (optional) */}
-                <Input
-                  placeholder="Email Address (Optional)"
-                  type="email"
-                  value={form.email}
-                  onChange={(e) => updateField("email", e.target.value)}
-                  className="bg-secondary/50 border-border focus:border-primary"
-                />
+                <Input placeholder="Email Address (Optional)" type="email" value={form.email} onChange={(e) => updateField("email", e.target.value)} className="bg-secondary/50 border-border focus:border-primary" />
 
-                {/* City & State */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <Input
-                      placeholder="City *"
-                      value={form.city}
-                      onChange={(e) => updateField("city", e.target.value)}
-                      className={`bg-secondary/50 border-border focus:border-primary ${errors.city ? "border-destructive" : ""}`}
-                    />
+                    <Input placeholder="City *" value={form.city} onChange={(e) => updateField("city", e.target.value)} className={`bg-secondary/50 border-border focus:border-primary ${errors.city ? "border-destructive" : ""}`} />
                     {errors.city && <p className="text-destructive text-xs mt-1">{errors.city}</p>}
                   </div>
                   <div>
-                    <select
-                      value={form.state}
-                      onChange={(e) => updateField("state", e.target.value)}
-                      className={`flex h-10 w-full rounded-md border bg-secondary/50 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${errors.state ? "border-destructive" : "border-border"} ${!form.state ? "text-muted-foreground" : ""}`}
-                    >
+                    <select value={form.state} onChange={(e) => updateField("state", e.target.value)} className={`flex h-10 w-full rounded-md border bg-secondary/50 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${errors.state ? "border-destructive" : "border-border"} ${!form.state ? "text-muted-foreground" : ""}`}>
                       <option value="" className="bg-background text-muted-foreground">Select State *</option>
                       {indianStates.map((s) => (
                         <option key={s} value={s} className="bg-background text-foreground">{s}</option>
@@ -194,26 +163,12 @@ const ContactSection = () => {
                   </div>
                 </div>
 
-                {/* Monthly Bill */}
                 <div>
-                  <Input
-                    placeholder="Monthly Electricity Bill (₹) *"
-                    type="number"
-                    value={form.monthlyBill}
-                    onChange={(e) => updateField("monthlyBill", e.target.value)}
-                    className={`bg-secondary/50 border-border focus:border-primary ${errors.monthlyBill ? "border-destructive" : ""}`}
-                  />
+                  <Input placeholder="Monthly Electricity Bill (₹) *" type="number" value={form.monthlyBill} onChange={(e) => updateField("monthlyBill", e.target.value)} className={`bg-secondary/50 border-border focus:border-primary ${errors.monthlyBill ? "border-destructive" : ""}`} />
                   {errors.monthlyBill && <p className="text-destructive text-xs mt-1">{errors.monthlyBill}</p>}
                 </div>
 
-                {/* Message (optional) */}
-                <textarea
-                  placeholder="Any additional message (Optional)..."
-                  rows={3}
-                  value={form.message}
-                  onChange={(e) => updateField("message", e.target.value)}
-                  className="flex w-full rounded-md border border-border bg-secondary/50 px-3 py-2 text-base placeholder:text-muted-foreground focus:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:text-sm resize-none text-foreground"
-                />
+                <textarea placeholder="Any additional message (Optional)..." rows={3} value={form.message} onChange={(e) => updateField("message", e.target.value)} className="flex w-full rounded-md border border-border bg-secondary/50 px-3 py-2 text-base placeholder:text-muted-foreground focus:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:text-sm resize-none text-foreground" />
 
                 <Button className="w-full animate-pulse-glow text-base py-6 font-bold group" type="submit" disabled={loading}>
                   {loading ? (
