@@ -7,8 +7,18 @@ import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import TermsConditions from "./pages/TermsConditions.tsx";
+import ServiceDetailPage from "./pages/ServiceDetailPage.tsx";
 
 const queryClient = new QueryClient();
+
+const serviceRoutes = [
+  "solar-installation",
+  "maintenance-repair",
+  "custom-design",
+  "net-metering",
+  "subsidy-assistance",
+  "commercial-solar",
+];
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -20,7 +30,9 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-conditions" element={<TermsConditions />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          {serviceRoutes.map((slug) => (
+            <Route key={slug} path={`/services/${slug}`} element={<ServiceDetailPage slug={slug} />} />
+          ))}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

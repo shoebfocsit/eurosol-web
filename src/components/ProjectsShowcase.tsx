@@ -6,10 +6,10 @@ import happyCustomer from "@/assets/happy-customer.jpg";
 import heroBg from "@/assets/solar-hero-bg.jpg";
 
 const projects = [
-  { title: "BrightHome Residency", location: "Lucknow, UP", capacity: "15 kW", panels: 42, savings: "₹18,000/month", image: solarInstallation },
-  { title: "GreenMart Commercial", location: "Kanpur, UP", capacity: "50 kW", panels: 140, savings: "₹65,000/month", image: solarPanels },
-  { title: "EcoSchool Campus", location: "Varanasi, UP", capacity: "25 kW", panels: 72, savings: "₹30,000/month", image: happyCustomer },
-  { title: "SunVilla Township", location: "Noida, UP", capacity: "100 kW", panels: 280, savings: "₹1,20,000/month", image: heroBg },
+  { title: "BrightHome Residency", location: "Indore, MP", capacity: "15 kW", panels: 42, savings: "₹18,000/month", image: solarInstallation },
+  { title: "GreenMart Commercial", location: "Nagpur, Maharashtra", capacity: "50 kW", panels: 140, savings: "₹65,000/month", image: solarPanels },
+  { title: "EcoSchool Campus", location: "Bhopal, MP", capacity: "25 kW", panels: 72, savings: "₹30,000/month", image: happyCustomer },
+  { title: "SunVilla Township", location: "Indore, MP", capacity: "100 kW", panels: 280, savings: "₹1,20,000/month", image: heroBg },
 ];
 
 const ProjectsShowcase = () => {
@@ -22,7 +22,7 @@ const ProjectsShowcase = () => {
             Successfully <span className="gradient-text">Completed Projects</span>
           </h2>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-            Real results from real installations across Uttar Pradesh. See how we're transforming homes and businesses.
+            Real results from real installations across Madhya Pradesh & Maharashtra. See how we're transforming homes and businesses.
           </p>
         </ScrollAnimator>
 
@@ -31,18 +31,9 @@ const ProjectsShowcase = () => {
             <ScrollAnimator key={i} delay={i * 100}>
               <div className="glass rounded-2xl overflow-hidden group hover:border-primary/30 transition-all duration-500">
                 <div className="h-48 relative overflow-hidden">
-                  <img
-                    src={p.image}
-                    alt={p.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    loading="lazy"
-                    width={1200}
-                    height={800}
-                  />
+                  <img src={p.image} alt={p.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" width={1200} height={800} />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent" />
-                  <div className="absolute top-4 right-4 glass rounded-full px-3 py-1 text-xs font-bold text-primary">
-                    {p.capacity}
-                  </div>
+                  <div className="absolute top-4 right-4 glass rounded-full px-3 py-1 text-xs font-bold text-primary">{p.capacity}</div>
                   <div className="absolute bottom-4 left-5 right-5">
                     <h3 className="text-xl font-bold text-foreground">{p.title}</h3>
                     <div className="flex items-center gap-1 text-muted-foreground text-sm mt-1">

@@ -4,7 +4,7 @@ import happyCustomerImg from "@/assets/happy-customer.jpg";
 
 const highlights = [
   { icon: Award, text: "Certified & Licensed Installers" },
-  { icon: Shield, text: "10-Year Performance Warranty" },
+  { icon: Shield, text: "10+ Years of Industry Experience" },
   { icon: Leaf, text: "100% Clean & Green Energy" },
   { icon: CheckCircle2, text: "Government Subsidy Assistance" },
 ];
@@ -15,18 +15,10 @@ const AboutSection = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Image Side */}
           <ScrollAnimator animation="fade-in-up">
             <div className="relative">
               <div className="aspect-[4/3] rounded-2xl overflow-hidden relative shadow-2xl shadow-primary/10">
-                <img
-                  src={happyCustomerImg}
-                  alt="Happy customer family with solar panels"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                  width={1200}
-                  height={800}
-                />
+                <img src={happyCustomerImg} alt="Happy customer family with solar panels" className="w-full h-full object-cover" loading="lazy" width={1200} height={800} />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 glass rounded-xl p-3 flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
@@ -42,7 +34,6 @@ const AboutSection = () => {
             </div>
           </ScrollAnimator>
 
-          {/* Text Side */}
           <div>
             <ScrollAnimator>
               <span className="text-primary font-semibold text-sm tracking-widest uppercase">About Us</span>
@@ -51,10 +42,10 @@ const AboutSection = () => {
                 <span className="gradient-text">Solar Energy</span> Partner
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Eurosol Prime is a premier solar energy solutions provider dedicated to transforming how India powers its homes and businesses. With cutting-edge European technology and deep local expertise, we deliver solar systems that are efficient, durable, and cost-effective.
+                Eurosol Prime is a premier solar energy solutions provider headquartered in Indore, Madhya Pradesh with a strong presence in Nagpur, Maharashtra. With cutting-edge European technology and deep local expertise, we deliver solar systems that are efficient, durable, and cost-effective.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-8">
-                Our mission is to make clean energy accessible to every household. We've helped <span className="text-primary font-semibold">1200+ families</span> reduce their electricity bills by up to 90%, and our installations are backed by a <span className="text-primary font-semibold">10-year warranty</span>.
+                Our mission is to make clean energy accessible to every household. We've helped <span className="text-primary font-semibold">1200+ families</span> reduce their electricity bills by up to 90%, backed by our <span className="text-primary font-semibold">10+ years of industry experience</span>.
               </p>
             </ScrollAnimator>
 
