@@ -91,21 +91,17 @@ const EuroBuddy = () => {
     setLoading(true);
 
     let assistantSoFar = "";
+    let assistantStarted = false;
     const upsert = (chunk: string) => {
       assistantSoFar += chunk;
       setMessages((prev) => {
-        const last = prev[prev.length - 1];
-        if (last?.role === "assistant" && prev.length > next.length - 1 + 1 ? false : last?.role === "assistant" && prev.length === next.length + 1) {
-          return prev.map((m, i) =>
-            i === prev.length - 1 ? { ...m, content: assistantSoFar } : m
-          );
+        if (!assistantStarted) {
+          assistantStarted = true;
+          return [...prev, { role: "assistant", content: assistantSoFar }];
         }
-        if (last?.role === "assistant" && prev.length === next.length + 1) {
-          return prev.map((m, i) =>
-            i === prev.length - 1 ? { ...m, content: assistantSoFar } : m
-          );
-        }
-        return [...prev, { role: "assistant", content: assistantSoFar }];
+        return prev.map((m, i) =>
+          i === prev.length - 1 ? { ...m, content: assistantSoFar } : m
+        );
       });
     };
 
