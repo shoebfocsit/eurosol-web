@@ -186,7 +186,7 @@ const EuroBuddy = () => {
             <div className="absolute inset-0 rounded-full bg-primary animate-ping opacity-20" />
             <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-lg shadow-primary/40 group-hover:scale-110 transition-transform duration-300">
               <Bot className="w-6 h-6 sm:w-7 sm:h-7 text-primary-foreground" />
-              <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-emerald-400 border-2 border-background animate-pulse" />
+              <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-[hsl(142_70%_45%)] border-2 border-background animate-pulse" />
             </div>
           </div>
           <div className="absolute bottom-full right-0 mb-2 glass rounded-lg px-3 py-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
@@ -211,7 +211,7 @@ const EuroBuddy = () => {
                 <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center">
                   <Bot className="w-5 h-5 text-primary-foreground" />
                 </div>
-                <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-background" />
+                <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[hsl(142_70%_45%)] border-2 border-background" />
               </div>
               <div className="min-w-0">
                 <div className="flex items-center gap-1.5">
