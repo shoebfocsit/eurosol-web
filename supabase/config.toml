@@ -1,0 +1,4 @@
+project_id = "pwzqpuxcjueouxpiposv"
+
+[functions.euro-buddy]
+verify_jwt = false

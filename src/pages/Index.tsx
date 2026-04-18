@@ -11,6 +11,7 @@ import FAQSection from "@/components/FAQSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import EuroBuddy from "@/components/EuroBuddy";
 
 const Index = () => {
   return (
@@ -28,6 +29,7 @@ const Index = () => {
       <ContactSection />
       <Footer />
       <WhatsAppButton />
+      <EuroBuddy />
     </div>
   );
 };
