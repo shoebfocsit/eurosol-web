@@ -94,7 +94,7 @@ const sections = [
       "📍 **Branch Office:** Nagpur, Maharashtra, India",
       "🕐 **Response Time:** Within 48 business hours",
       "",
-      "**Data Protection Officer:** Amar Kapse (Founder & CEO)",
+      "**Data Protection Officer:** Amar Kapse (Director of Business Operations)",
     ],
   },
 ];

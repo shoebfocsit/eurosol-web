@@ -45,7 +45,7 @@ const Counter = ({ target, suffix }: { target: number; suffix: string }) => {
 
 const floatingBadges = [
   { icon: Star, text: "4.9★ Rating", pos: "top-[10%] left-[-30%] sm:left-[-40%]", delay: "0s" },
-  { icon: Award, text: "10+ Yrs Experience", pos: "top-[30%] right-[-30%] sm:right-[-40%]", delay: "0.5s" },
+  { icon: Award, text: "7+ Yrs Experience", pos: "top-[30%] right-[-30%] sm:right-[-40%]", delay: "0.5s" },
   { icon: Users, text: "1200+ Customers", pos: "bottom-[25%] left-[-25%] sm:left-[-35%]", delay: "1s" },
   { icon: Zap, text: "500+ Installations", pos: "bottom-[8%] right-[-25%] sm:right-[-35%]", delay: "1.5s" },
 ];
@@ -98,11 +98,11 @@ const HeroSection = () => {
             </h1>
 
             <p className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-8 animate-fade-in-up" style={{ animationDelay: "200ms" }}>
-              Stop overpaying for electricity. Switch to premium solar solutions and save up to <span className="text-primary font-bold">90% on your energy bills</span> with Eurosol Prime. Trusted by 1200+ families across Madhya Pradesh & Maharashtra.
+              Stop overpaying for electricity. Switch to premium solar solutions and save up to <span className="text-primary font-bold">100% on your energy bills</span> with Eurosol Prime. Trusted by 1200+ families across Madhya Pradesh & Maharashtra.
             </p>
 
             <div className="flex flex-wrap gap-3 justify-center lg:justify-start mb-8 animate-fade-in-up" style={{ animationDelay: "300ms" }}>
-              {["✅ Free Site Survey", "✅ Govt. Subsidy Help", "✅ 10+ Years Experience"].map((t) => (
+              {["✅ Free Site Survey", "✅ Govt. Subsidy Help", "✅ 7+ Years Experience"].map((t) => (
                 <span key={t} className="text-xs sm:text-sm text-muted-foreground glass rounded-full px-3 py-1.5">{t}</span>
               ))}
             </div>

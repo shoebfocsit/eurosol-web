@@ -8,7 +8,7 @@ const faqs = [
   },
   {
     q: "How much can I save on my electricity bill with solar?",
-    a: "Most homeowners save 80-90% on their electricity bills. A typical 3kW system generates 12-15 units per day, which covers most household needs. With net metering, any excess power is exported to the grid and credited to your account, further reducing your bills.",
+    a: "Most homeowners save up to 100% on their electricity bills. A typical 3kW system generates 12-15 units per day, which covers most household needs. With net metering, any excess power is exported to the grid and credited to your account, often eliminating your bill entirely.",
   },
   {
     q: "What government subsidies are available for solar in Madhya Pradesh & Maharashtra?",

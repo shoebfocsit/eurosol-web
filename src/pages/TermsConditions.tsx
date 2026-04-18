@@ -139,7 +139,7 @@ const sections = [
       "📍 **Branch Office:** Nagpur, Maharashtra, India",
       "🕐 **Business Hours:** Monday - Saturday, 9:00 AM - 7:00 PM IST",
       "",
-      "**Authorized Signatory:** Amar Kapse, Founder & CEO, Eurosol Prime",
+      "**Authorized Signatory:** Amar Kapse, Director of Business Operations, Eurosol Prime Pvt. Ltd.",
     ],
   },
 ];

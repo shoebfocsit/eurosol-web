@@ -4,7 +4,7 @@ import happyCustomerImg from "@/assets/happy-customer.jpg";
 
 const highlights = [
   { icon: Award, text: "Certified & Licensed Installers" },
-  { icon: Shield, text: "10+ Years of Industry Experience" },
+  { icon: Shield, text: "7+ Years of Industry Experience" },
   { icon: Leaf, text: "100% Clean & Green Energy" },
   { icon: CheckCircle2, text: "Government Subsidy Assistance" },
 ];
@@ -45,7 +45,7 @@ const AboutSection = () => {
                 Eurosol Prime is a premier solar energy solutions provider headquartered in Indore, Madhya Pradesh with a strong presence in Nagpur, Maharashtra. With cutting-edge European technology and deep local expertise, we deliver solar systems that are efficient, durable, and cost-effective.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-8">
-                Our mission is to make clean energy accessible to every household. We've helped <span className="text-primary font-semibold">1200+ families</span> reduce their electricity bills by up to 90%, backed by our <span className="text-primary font-semibold">10+ years of industry experience</span>.
+                Our mission is to make clean energy accessible to every household. We've helped <span className="text-primary font-semibold">1200+ families</span> reduce their electricity bills by up to 100%, backed by our <span className="text-primary font-semibold">7+ years of industry experience</span>.
               </p>
             </ScrollAnimator>
 
