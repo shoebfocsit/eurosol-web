@@ -1,41 +1,41 @@
 import { Linkedin, Twitter } from "lucide-react";
 import ScrollAnimator from "./ScrollAnimator";
 import founderImg from "@/assets/team-founder.png";
-import cofounderImg from "@/assets/team-cofounder.png";
-import ctoImg from "@/assets/team-cto.png";
-import opsImg from "@/assets/team-ops.png";
-import salesImg from "@/assets/team-sales.png";
+import prernaImg from "@/assets/team-prerna.png";
+import bhushanImg from "@/assets/team-bhushan.png";
+import shoebImg from "@/assets/team-shoeb.png";
+import prajwalImg from "@/assets/team-prajwal.png";
 
 const team = [
   {
     name: "Amar Kapse",
-    role: "Founder & CEO",
+    role: "Director of Business Operations",
     image: founderImg,
-    desc: "Visionary leader with 10+ years in renewable energy, driving India's solar revolution from Indore.",
+    desc: "Leading business operations at Eurosol Prime Pvt. Ltd., driving India's solar revolution from Indore.",
   },
   {
-    name: "Priya Kapse",
-    role: "Co-Founder & COO",
-    image: cofounderImg,
-    desc: "Operations expert ensuring seamless project delivery across Madhya Pradesh & Maharashtra.",
+    name: "Prerna Amar Kapse",
+    role: "Founder",
+    image: prernaImg,
+    desc: "Visionary founder championing clean energy adoption across Madhya Pradesh & Maharashtra.",
   },
   {
-    name: "Rahul Sharma",
-    role: "CTO",
-    image: ctoImg,
-    desc: "Tech innovator leading smart solar monitoring & IoT integration solutions.",
+    name: "Bhushan",
+    role: "Zone Manager — Indore",
+    image: bhushanImg,
+    desc: "Heading Indore zone operations with seamless project delivery and customer satisfaction.",
   },
   {
-    name: "Priya Desai",
-    role: "Head of Operations",
-    image: opsImg,
-    desc: "Managing 500+ installations with zero-defect quality standards.",
+    name: "Shoeb Raj",
+    role: "IT Head",
+    image: shoebImg,
+    desc: "5+ years experience leading tech, smart solar monitoring, and IoT integration solutions.",
   },
   {
-    name: "Vikram Singh",
-    role: "Sales Director",
-    image: salesImg,
-    desc: "Building lasting customer relationships with transparent solar solutions.",
+    name: "Prajwal Shambharkar",
+    role: "Sales Executive",
+    image: prajwalImg,
+    desc: "Building lasting customer relationships with transparent solar solutions across Nagpur region.",
   },
 ];
 
@@ -57,7 +57,7 @@ const TeamSection = () => {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
           {team.map((member, i) => (
             <ScrollAnimator key={member.name} delay={i * 100}>
-              <div className="glass rounded-2xl p-4 sm:p-5 text-center group hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
+              <div className="glass rounded-2xl p-4 sm:p-5 text-center group hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 h-full">
                 <div className="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-4">
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/30 to-primary/5 animate-pulse" />
                   <img
