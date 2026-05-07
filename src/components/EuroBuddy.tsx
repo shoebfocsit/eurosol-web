@@ -25,7 +25,6 @@ const EuroBuddy = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
-  const [visible, setVisible] = useState(true);
   const [messages, setMessages] = useState<Msg[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -37,7 +36,6 @@ const EuroBuddy = () => {
   const [loading, setLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const hideTimerRef = useRef<number | null>(null);
 
   // Persist chat
   useEffect(() => {
@@ -60,29 +58,6 @@ const EuroBuddy = () => {
       setFullscreen(isMobile);
       setTimeout(() => inputRef.current?.focus(), 200);
     }
-  }, [open]);
-
-  // Auto-hide trigger after 5s of inactivity; reveal on user activity
-  useEffect(() => {
-    if (open) {
-      if (hideTimerRef.current) window.clearTimeout(hideTimerRef.current);
-      return;
-    }
-    const scheduleHide = () => {
-      if (hideTimerRef.current) window.clearTimeout(hideTimerRef.current);
-      hideTimerRef.current = window.setTimeout(() => setVisible(false), 5000);
-    };
-    const wake = () => {
-      setVisible(true);
-      scheduleHide();
-    };
-    scheduleHide();
-    const events: Array<keyof WindowEventMap> = ["mousemove", "touchstart", "scroll", "keydown"];
-    events.forEach((e) => window.addEventListener(e, wake, { passive: true }));
-    return () => {
-      if (hideTimerRef.current) window.clearTimeout(hideTimerRef.current);
-      events.forEach((e) => window.removeEventListener(e, wake));
-    };
   }, [open]);
 
   const handleLinkClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -203,19 +178,11 @@ const EuroBuddy = () => {
       {/* Trigger Button */}
       {!open && (
         <button
-          onClick={() => {
-            setVisible(true);
-            setOpen(true);
-          }}
-          onMouseEnter={() => setVisible(true)}
+          onClick={() => setOpen(true)}
           aria-label="Open Euro Buddy chat"
-          className={`fixed bottom-[5.5rem] right-6 z-40 group transition-all duration-500 ${
-            visible
-              ? "opacity-100 translate-x-0 pointer-events-auto"
-              : "opacity-0 translate-x-[120%] pointer-events-none"
-          }`}
+          className="fixed bottom-[5.5rem] right-6 z-40 group"
         >
-          <div className="relative sm:animate-none animate-side-wave origin-bottom">
+          <div className="relative">
             <div className="absolute inset-0 rounded-full bg-primary animate-ping opacity-20" />
             <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-lg shadow-primary/40 group-hover:scale-110 transition-transform duration-300">
               <Bot className="w-6 h-6 sm:w-7 sm:h-7 text-primary-foreground" />
