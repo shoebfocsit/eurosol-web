@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 type Msg = { role: "user" | "assistant"; content: string };
 
 const STORAGE_KEY = "euro-buddy-chat";
-const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/euro-buddy`;
+const CHAT_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api/chat";
 
 const WELCOME: Msg = {
   role: "assistant",
@@ -331,7 +331,7 @@ const EuroBuddy = () => {
               </button>
             </div>
             <p className="text-[10px] text-muted-foreground text-center mt-1.5">
-              Powered by Lovable AI · Always verify pricing with our team
+              Powered by <a href="https://focsit.in" target="_blank" rel="noopener noreferrer" className="hover:underline font-semibold">FOCS IT</a>
             </p>
           </form>
         </div>

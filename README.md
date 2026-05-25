@@ -1,3 +1,3 @@
-# Welcome to your Lovable project
+# Eurosol Prime Website
 
-TODO: Document your project here
+Eurosol Prime is the leading solar panel installation company in Indore, Madhya Pradesh & Nagpur, Maharashtra.

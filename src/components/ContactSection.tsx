@@ -75,7 +75,7 @@ const ContactSection = () => {
         message: form.message.trim() || undefined,
       };
 
-      const res = await fetch("https://eurosol-api-production.up.railway.app/v1/website-inquiries", {
+      const res = await fetch("https://api.eurosolservice.com/v1/website-inquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

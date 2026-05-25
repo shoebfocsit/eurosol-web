@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { ArrowRight, Zap, Home, Calendar, Users, Star, Shield, Calculator, Award } from "lucide-react";
+import { ArrowRight, Zap, Home, Calendar, Users, Star, Shield, Calculator, Award, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ownerImg from "@/assets/owner-portrait.png";
 import heroBg from "@/assets/solar-hero-bg.jpg";
@@ -107,7 +107,7 @@ const HeroSection = () => {
               ))}
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center animate-fade-in-up" style={{ animationDelay: "400ms" }}>
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center lg:justify-start items-center animate-fade-in-up" style={{ animationDelay: "400ms" }}>
               <Button
                 size="lg"
                 className="animate-pulse-glow text-base px-8 py-6 font-bold group"
@@ -124,6 +124,15 @@ const HeroSection = () => {
               >
                 <Calculator className="w-5 h-5 mr-1" />
                 Calculate Savings
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="text-base px-8 py-6 border-primary/20 hover:border-primary/60 bg-primary/5 hover:bg-primary/10 text-primary font-semibold group flex items-center gap-1.5 transition-all"
+                onClick={() => window.open("https://www.eurosolservice.com", "_blank", "noopener,noreferrer")}
+              >
+                Visit Eurosol Service
+                <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Button>
             </div>
           </div>

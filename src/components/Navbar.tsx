@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Sun } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logoImg from "@/assets/logo.jpeg";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -32,8 +33,8 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <a href="#home" className="flex items-center gap-2 group">
-            <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center group-hover:glow-orange transition-all duration-300">
-              <Sun className="w-5 h-5 text-primary-foreground" />
+            <div className="w-10 h-10 rounded-full overflow-hidden border border-primary/30 flex items-center justify-center group-hover:border-primary/80 transition-all duration-300">
+              <img src={logoImg} alt="Eurosol Prime Logo" className="w-full h-full object-cover" />
             </div>
             <div className="flex flex-col">
               <span className="text-base font-bold tracking-tight text-foreground leading-tight">Eurosol</span>
