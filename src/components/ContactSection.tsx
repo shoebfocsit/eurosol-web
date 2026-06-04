@@ -56,6 +56,7 @@ interface FormData {
 interface FormErrors {
   name?: string;
   phone?: string;
+  email?: string;
   city?: string;
   state?: string;
   monthlyBill?: string;
@@ -82,12 +83,65 @@ const ContactSection = () => {
     }
   }, []);
 
+  const getServiceType = (serviceName: string): string => {
+    if (!serviceName) return "General Inquiry";
+    
+    const lowercaseName = serviceName.toLowerCase();
+    
+    // Installation
+    if (
+      lowercaseName.includes("installation") ||
+      lowercaseName.includes("rooftop") ||
+      lowercaseName.includes("ground mounted") ||
+      lowercaseName.includes("agrivoltaics") ||
+      lowercaseName.includes("industrial") ||
+      lowercaseName.includes("commercial") ||
+      lowercaseName.includes("institutional") ||
+      lowercaseName.includes("epc")
+    ) {
+      return "Installation";
+    }
+    
+    // Maintenance
+    if (
+      lowercaseName.includes("maintenance") ||
+      lowercaseName.includes("scada") ||
+      lowercaseName.includes("asset management") ||
+      lowercaseName.includes("monitoring")
+    ) {
+      return "Maintenance";
+    }
+    
+    // Custom Design
+    if (
+      lowercaseName.includes("design") ||
+      lowercaseName.includes("engineering")
+    ) {
+      return "Custom Design";
+    }
+    
+    // Solar Audit
+    if (
+      lowercaseName.includes("efficiency") ||
+      lowercaseName.includes("audit")
+    ) {
+      return "Solar Audit";
+    }
+    
+    return "General Inquiry";
+  };
+
   const validate = (): boolean => {
     const e: FormErrors = {};
     if (!form.name.trim()) e.name = "Name is required";
     if (!form.phone.trim()) e.phone = "Phone number is required";
     else if (!/^(\+91[-\s]?)?[6-9]\d{9}$/.test(form.phone.replace(/[\s-]/g, "")))
       e.phone = "Enter a valid Indian phone number";
+    
+    if (!form.email.trim()) e.email = "Email is required";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()))
+      e.email = "Enter a valid email address";
+
     if (!form.city.trim()) e.city = "City is required";
     if (!form.state) e.state = "State is required";
     if (!form.monthlyBill) e.monthlyBill = "Monthly bill is required";
@@ -103,22 +157,22 @@ const ContactSection = () => {
     setLoading(true);
     try {
       const combinedMessage = [
-        form.service ? `[Service Requested: ${form.service}]` : "",
+        form.service ? `[Service: ${form.service}]` : "",
+        form.state ? `[State: ${form.state}]` : "",
+        form.monthlyBill ? `[Monthly Bill: ₹${form.monthlyBill}]` : "",
         form.message.trim()
       ].filter(Boolean).join("\n");
 
       const payload = {
-        name: form.name.trim(),
+        fullName: form.name.trim(),
         phone: form.phone.trim(),
-        email: form.email.trim() || undefined,
+        email: form.email.trim(),
         city: form.city.trim(),
-        state: form.state,
-        monthlyBill: parseInt(form.monthlyBill),
+        serviceType: getServiceType(form.service),
         message: combinedMessage || undefined,
-        service: form.service || undefined,
       };
 
-      const res = await fetch("https://api.eurosolservice.com/v1/website-inquiries", {
+      const res = await fetch("https://api.eurosolservice.com/v1/web/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -188,7 +242,10 @@ const ContactSection = () => {
                   </div>
                 </div>
 
-                <Input placeholder="Email Address (Optional)" type="email" value={form.email} onChange={(e) => updateField("email", e.target.value)} className="bg-secondary/50 border-border focus:border-primary" />
+                <div>
+                  <Input placeholder="Email Address *" type="email" value={form.email} onChange={(e) => updateField("email", e.target.value)} className={`bg-secondary/50 border-border focus:border-primary ${errors.email ? "border-destructive" : ""}`} />
+                  {errors.email && <p className="text-destructive text-xs mt-1">{errors.email}</p>}
+                </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
