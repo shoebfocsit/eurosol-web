@@ -10,7 +10,7 @@ import shoebRajITHeadImg from "@/assets/team/shoeb raj IT Head.jpeg";
 
 const team = [
   {
-    name: "Bhushan",
+    name: "Lavish Sharma",
     role: "Head of Business",
     image: headOfBusinessImg,
     desc: "Leading business strategy, corporate growth, and client relations at Eurosol Prime.",
@@ -22,13 +22,13 @@ const team = [
     desc: "Overseeing daily operational workflows, system deployments, and project delivery.",
   },
   {
-    name: "",
+    name: "Anil Nargiz",
     role: "Head of Installation Nagpur",
     image: headOfInstallationNagpurImg,
     desc: "Spearheading engineering standards and solar plant installations in the Nagpur region.",
   },
   {
-    name: "Pintu",
+    name: "Pintu dawar",
     role: "Head of Installation Indore",
     image: pintuHeadOfInstallationIndoreImg,
     desc: "Managing on-site operations, panel mounting, and solar grid setup in Indore.",

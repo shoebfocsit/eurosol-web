@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Phone, Mail, Clock, Send, Loader2, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,6 +19,29 @@ const indianStates = [
   "Uttarakhand", "West Bengal", "Delhi", "Jammu & Kashmir", "Ladakh",
 ];
 
+const serviceMap: Record<string, string> = {
+  "agrivoltaics": "Agrivoltaics (Solar Farming)",
+  "virtual-net-metering": "Virtual Net Metering (VNM)",
+  "open-access-solar": "Open Access Solar",
+  "solar-ppa": "Solar Power Purchase Agreement (PPA)",
+  "green-power-supply": "Green Power Supply",
+  "industrial-solar": "Industrial Solar Solutions",
+  "commercial-solar": "Commercial Solar Solutions",
+  "institutional-solar": "Institutional Solar Solutions",
+  "solar-epc": "Solar EPC Services",
+  "operation-maintenance": "Operation & Maintenance (O&M)",
+  "scada-monitoring": "Remote Monitoring / SCADA Monitoring",
+  "energy-efficiency": "Energy Efficiency Solutions",
+  "net-metering": "Net Metering Services",
+  "ground-mounted-solar": "Ground Mounted Solar Plants",
+  "rooftop-solar": "Rooftop Solar Systems",
+  "group-captive-solar": "Group Captive Solar Solutions",
+  "project-design-engineering": "Solar Project Design & Engineering",
+  "installation-commissioning": "Solar Installation & Commissioning",
+  "regulatory-approval-support": "Solar Regulatory & Approval Support",
+  "solar-asset-management": "Solar Asset Management",
+};
+
 interface FormData {
   name: string;
   phone: string;
@@ -27,6 +50,7 @@ interface FormData {
   state: string;
   monthlyBill: string;
   message: string;
+  service: string;
 }
 
 interface FormErrors {
@@ -39,11 +63,24 @@ interface FormErrors {
 
 const ContactSection = () => {
   const [form, setForm] = useState<FormData>({
-    name: "", phone: "", email: "", city: "", state: "", monthlyBill: "", message: "",
+    name: "", phone: "", email: "", city: "", state: "", monthlyBill: "", message: "", service: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const serviceParam = params.get("service");
+    if (serviceParam && serviceMap[serviceParam]) {
+      setForm((p) => ({ ...p, service: serviceMap[serviceParam] }));
+      
+      // Smooth scroll to the contact form on render if the parameter is present
+      setTimeout(() => {
+        document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+    }
+  }, []);
 
   const validate = (): boolean => {
     const e: FormErrors = {};
@@ -65,6 +102,11 @@ const ContactSection = () => {
 
     setLoading(true);
     try {
+      const combinedMessage = [
+        form.service ? `[Service Requested: ${form.service}]` : "",
+        form.message.trim()
+      ].filter(Boolean).join("\n");
+
       const payload = {
         name: form.name.trim(),
         phone: form.phone.trim(),
@@ -72,7 +114,8 @@ const ContactSection = () => {
         city: form.city.trim(),
         state: form.state,
         monthlyBill: parseInt(form.monthlyBill),
-        message: form.message.trim() || undefined,
+        message: combinedMessage || undefined,
+        service: form.service || undefined,
       };
 
       const res = await fetch("https://api.eurosolservice.com/v1/website-inquiries", {
@@ -85,7 +128,7 @@ const ContactSection = () => {
 
       setSubmitted(true);
       toast.success("🎉 Inquiry submitted! We'll contact you within 24 hours.");
-      setForm({ name: "", phone: "", email: "", city: "", state: "", monthlyBill: "", message: "" });
+      setForm({ name: "", phone: "", email: "", city: "", state: "", monthlyBill: "", message: "", service: "" });
       setTimeout(() => setSubmitted(false), 5000);
     } catch {
       toast.error("Something went wrong. Please try again or call us directly.");
@@ -161,6 +204,19 @@ const ContactSection = () => {
                     </select>
                     {errors.state && <p className="text-destructive text-xs mt-1">{errors.state}</p>}
                   </div>
+                </div>
+
+                <div>
+                  <select
+                    value={form.service}
+                    onChange={(e) => updateField("service", e.target.value)}
+                    className="flex h-10 w-full rounded-md border border-border bg-secondary/50 px-3 py-2 text-sm text-foreground focus:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    <option value="" className="bg-background text-muted-foreground">Select Service Interested In (Optional)</option>
+                    {Object.values(serviceMap).map((name) => (
+                      <option key={name} value={name} className="bg-background text-foreground">{name}</option>
+                    ))}
+                  </select>
                 </div>
 
                 <div>

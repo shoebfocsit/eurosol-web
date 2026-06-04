@@ -12,12 +12,33 @@ import ServiceDetailPage from "./pages/ServiceDetailPage.tsx";
 const queryClient = new QueryClient();
 
 const serviceRoutes = [
+  // New 20 Services
+  "agrivoltaics",
+  "virtual-net-metering",
+  "open-access-solar",
+  "solar-ppa",
+  "green-power-supply",
+  "industrial-solar",
+  "commercial-solar",
+  "institutional-solar",
+  "solar-epc",
+  "operation-maintenance",
+  "scada-monitoring",
+  "energy-efficiency",
+  "net-metering",
+  "ground-mounted-solar",
+  "rooftop-solar",
+  "group-captive-solar",
+  "project-design-engineering",
+  "installation-commissioning",
+  "regulatory-approval-support",
+  "solar-asset-management",
+  
+  // Legacy aliases for backward compatibility
   "solar-installation",
   "maintenance-repair",
   "custom-design",
-  "net-metering",
   "subsidy-assistance",
-  "commercial-solar",
 ];
 
 const App = () => (
