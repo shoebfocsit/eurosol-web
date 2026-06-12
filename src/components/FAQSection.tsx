@@ -12,7 +12,7 @@ const faqs = [
   },
   {
     q: "What government subsidies are available for solar in Madhya Pradesh & Maharashtra?",
-    a: "Under the PM Surya Ghar Muft Bijli Yojana, residential consumers can get subsidies up to ₹78,000 for systems up to 3kW. For 3-10kW systems, subsidy is ₹30,000/kW for the first 2kW and ₹18,000/kW for the next 1kW. Both MP and Maharashtra state governments also offer additional incentives. Eurosol Prime handles the entire subsidy application process for you.",
+    a: "Under the PM Surya Ghar Muft Bijli Yojana, residential consumers get a fixed subsidy: ₹30,000 for 1kW, ₹60,000 for 2kW, and ₹78,000 for 3kW & above. Both MP and Maharashtra state governments also offer additional incentives. Eurosol Prime handles the entire subsidy application process for you.",
   },
   {
     q: "How long does installation take?",

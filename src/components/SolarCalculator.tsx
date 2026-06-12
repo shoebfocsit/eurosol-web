@@ -87,14 +87,11 @@ const SolarCalculator = () => {
 
     const systemCostWithoutSubsidy = Math.round(systemSize * costPerKW);
 
-    // Govt subsidy (PM Surya Ghar - only for residential up to 10kW)
     let subsidyAmount = 0;
-    if (systemType === "residential" && systemSize <= 10) {
-      let subsidyPerKW = 0;
-      if (systemSize <= 2) subsidyPerKW = 30000;
-      else if (systemSize <= 3) subsidyPerKW = 18000;
-      else subsidyPerKW = 9000;
-      subsidyAmount = Math.round(Math.min(systemSize, 10) * subsidyPerKW);
+    if (systemType === "residential") {
+      if (systemSize >= 3) subsidyAmount = 78000;
+      else if (systemSize >= 2) subsidyAmount = 60000;
+      else if (systemSize >= 1) subsidyAmount = 30000;
     }
 
     const systemCostWithSubsidy = Math.max(systemCostWithoutSubsidy - subsidyAmount, 0);
