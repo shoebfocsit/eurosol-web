@@ -7,6 +7,7 @@ import headOfOperationImg from "@/assets/team/Head of Operation.jpg";
 import pintuHeadOfInstallationIndoreImg from "@/assets/team/Pintu Head of installation Indore.jpeg";
 import headOfInstallationNagpurImg from "@/assets/team/Head of Installation Nagpur.jpeg";
 import shoebRajITHeadImg from "@/assets/team/shoeb raj IT Head.jpeg";
+import sonuImg from "@/assets/team/sonu.jpeg";
 
 const team = [
   {
@@ -45,6 +46,12 @@ const team = [
     image: shoebRajITHeadImg,
     desc: "Leading software infrastructure, smart solar monitoring systems, and technical operations.",
   },
+  {
+    name: "Niklesh Kapse",
+    role: "Strategic Investor",
+    image: sonuImg,
+    desc: "Niklesh Kapse is a strategic investor supporting Eurosol Service OPC Pvt. Ltd.'s growth, innovation, and commitment to renewable energy.",
+  },
 ];
 
 const TeamSection = () => {
@@ -64,7 +71,7 @@ const TeamSection = () => {
           </p>
         </ScrollAnimator>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4 sm:gap-6">
           {team.map((member, i) => (
             <ScrollAnimator key={member.name} delay={i * 100}>
               <div
