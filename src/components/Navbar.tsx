@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, ExternalLink } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import logoImg from "@/assets/logo.jpeg";
@@ -10,6 +10,7 @@ const navLinks = [
   { label: "Services", href: "#services" },
   { label: "Calculator", href: "#calculator" },
   { label: "Projects", href: "#projects" },
+  { label: "Blog", href: "https://blog.eurosolprime.com", external: true },
   { label: "Testimonials", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
 ];
@@ -50,9 +51,11 @@ const Navbar = () => {
               <a
                 key={link.label}
                 href={link.href}
-                className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 relative group"
+                {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-200 relative group inline-flex items-center gap-1"
               >
                 {link.label}
+                {link.external && <ExternalLink className="w-3 h-3" />}
                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary rounded-full transition-all duration-300 group-hover:w-2/3" />
               </a>
             ))}
@@ -90,10 +93,12 @@ const Navbar = () => {
               <a
                 key={link.label}
                 href={link.href}
-                onClick={() => setMobileOpen(false)}
+                {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                onClick={() => { if (!link.external) setMobileOpen(false); }}
                 className="block px-4 py-3 text-base text-muted-foreground hover:text-foreground hover:bg-secondary/50 rounded-lg transition-all"
               >
                 {link.label}
+                {link.external && <ExternalLink className="w-3 h-3 inline ml-1" />}
               </a>
             ))}
             <div className="pt-2 flex items-center gap-2">
